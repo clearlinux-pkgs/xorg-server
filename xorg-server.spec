@@ -6,7 +6,7 @@
 #
 Name     : xorg-server
 Version  : 1.20.11
-Release  : 90
+Release  : 91
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz.sig
@@ -177,10 +177,10 @@ export SOURCE_DATE_EPOCH=1618332574
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
 %reconfigure --disable-static --with-int10=x86emu --enable-config-udev --enable-config-udev-kms  --enable-dri2 --enable-dri --enable-dri3 --enable-dbe --enable-record --enable-systemd-logind --enable-glamor --enable-xwayland
 make  %{?_smp_mflags}
 
