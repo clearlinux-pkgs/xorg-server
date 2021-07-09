@@ -6,7 +6,7 @@
 #
 Name     : xorg-server
 Version  : 1.20.11
-Release  : 92
+Release  : 93
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-1.20.11.tar.gz.sig
@@ -25,6 +25,7 @@ Requires: xf86-video-ati
 Requires: xf86-video-fbdev
 Requires: xf86-video-nouveau
 Requires: xf86-video-vesa
+Requires: xwayland
 BuildRequires : bison
 BuildRequires : buildreq-meson
 BuildRequires : dbus-dev
@@ -173,7 +174,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1625843085
+export SOURCE_DATE_EPOCH=1625843623
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
@@ -181,11 +182,11 @@ export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interp
 export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 export FFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-%reconfigure --disable-static --with-int10=x86emu --enable-config-udev --enable-config-udev-kms  --enable-dri2 --enable-dri --enable-dri3 --enable-dbe --enable-record --enable-systemd-logind --enable-glamor --enable-xwayland
+%reconfigure --disable-static --with-int10=x86emu --enable-config-udev --enable-config-udev-kms  --enable-dri2 --enable-dri --enable-dri3 --enable-dbe --enable-record --enable-systemd-logind --enable-glamor --disable-xwayland
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1625843085
+export SOURCE_DATE_EPOCH=1625843623
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
 cp %{_builddir}/xorg-server-1.20.11/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
