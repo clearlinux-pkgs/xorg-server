@@ -8,6 +8,7 @@ libdrm.so.2
 libepoxy.so.0
 libgbm.so.1
 libm.so.6
+libmvec.so.1
 libnettle.so.8
 libpciaccess.so.0
 libpixman-1.so.0
@@ -15,4 +16,3 @@ libpthread.so.0
 libsystemd.so.0
 libudev.so.1
 libunwind.so.8
-libwayland-client.so.0

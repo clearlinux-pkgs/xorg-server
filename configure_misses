@@ -2,6 +2,7 @@ Configure miss: CC_SHA1_Init
 Configure miss: SHA1Init
 Configure miss: SHA1Init in -lmd
 Configure miss: arc4random_buf in -lbsd
+Configure miss: authdes_create
 Configure miss: authdes_seccreate
 Configure miss: dependency style of $(CC)
 Configure miss: dtrace
@@ -9,6 +10,7 @@ Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: getzoneid
 Configure miss: hal
 Configure miss: if SVR4 needs to be defined
+Configure miss: if Secure RPC authentication ("SUN-DES-1") should be supported
 Configure miss: if Xtrans should support os-specific local connections
 Configure miss: isastream
 Configure miss: library containing yywrap
