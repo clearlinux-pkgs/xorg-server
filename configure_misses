@@ -1,33 +1,66 @@
 Configure miss: CC_SHA1_Init
+Configure miss: CC_SHA1_Init
+Configure miss: SHA1Init
 Configure miss: SHA1Init
 Configure miss: SHA1Init in -lmd
+Configure miss: SHA1Init in -lmd
+Configure miss: arc4random_buf in -lbsd
 Configure miss: arc4random_buf in -lbsd
 Configure miss: authdes_create
+Configure miss: authdes_create
+Configure miss: authdes_seccreate
 Configure miss: authdes_seccreate
 Configure miss: dependency style of $(CC)
+Configure miss: dependency style of $(CC)
+Configure miss: dtrace
 Configure miss: dtrace
 Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: getzoneid
 Configure miss: getzoneid
 Configure miss: hal
+Configure miss: hal
+Configure miss: if SVR4 needs to be defined
 Configure miss: if SVR4 needs to be defined
 Configure miss: if Secure RPC authentication ("SUN-DES-1") should be supported
+Configure miss: if Secure RPC authentication ("SUN-DES-1") should be supported
+Configure miss: if Xtrans should support os-specific local connections
 Configure miss: if Xtrans should support os-specific local connections
 Configure miss: isastream
+Configure miss: isastream
+Configure miss: library containing yywrap
 Configure miss: library containing yywrap
 Configure miss: libsha1
+Configure miss: libsha1
+Configure miss: machine/apmvar.h
 Configure miss: machine/apmvar.h
 Configure miss: pthread_setname_np(const char*)
+Configure miss: pthread_setname_np(const char*)
+Configure miss: shmctl64
 Configure miss: shmctl64
 Configure miss: stropts.h
+Configure miss: stropts.h
+Configure miss: sys/agpgart.h
 Configure miss: sys/agpgart.h
 Configure miss: sys/agpio.h
+Configure miss: sys/agpio.h
+Configure miss: sys/linker.h
 Configure miss: sys/linker.h
 Configure miss: timingsafe_memcmp
+Configure miss: timingsafe_memcmp
+Configure miss: to see if we can install the Xorg server as root
 Configure miss: to see if we can install the Xorg server as root
 Configure miss: walkcontext
+Configure miss: walkcontext
+Configure miss: whether to build XWin DDX
 Configure miss: whether to build XWin DDX
 Configure miss: whether to build Xdmx DDX
+Configure miss: whether to build Xdmx DDX
+Configure miss: whether to build Xwayland DDX
 Configure miss: whether to build Xwayland DDX
 Configure miss: wincrypt.h
+Configure miss: wincrypt.h
 Configure miss: x86_64-generic-linux-gnu-cpp
+Configure miss: x86_64-generic-linux-gnu-cpp
+Configure miss: xaw7 xmu xt xpm x11
 Configure miss: xaw7 xmu xt xpm x11
