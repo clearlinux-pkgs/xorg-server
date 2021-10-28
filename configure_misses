@@ -32,8 +32,6 @@ Configure miss: library containing yywrap
 Configure miss: library containing yywrap
 Configure miss: libsha1
 Configure miss: libsha1
-Configure miss: machine/apmvar.h
-Configure miss: machine/apmvar.h
 Configure miss: pthread_setname_np(const char*)
 Configure miss: pthread_setname_np(const char*)
 Configure miss: shmctl64
@@ -54,13 +52,7 @@ Configure miss: walkcontext
 Configure miss: walkcontext
 Configure miss: whether to build XWin DDX
 Configure miss: whether to build XWin DDX
-Configure miss: whether to build Xdmx DDX
-Configure miss: whether to build Xdmx DDX
-Configure miss: whether to build Xwayland DDX
-Configure miss: whether to build Xwayland DDX
 Configure miss: wincrypt.h
 Configure miss: wincrypt.h
 Configure miss: x86_64-generic-linux-gnu-cpp
 Configure miss: x86_64-generic-linux-gnu-cpp
-Configure miss: xaw7 xmu xt xpm x11
-Configure miss: xaw7 xmu xt xpm x11

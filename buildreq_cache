@@ -1,8 +1,9 @@
-1.20.11
+21.1.0
 bison
 doxygen
 flex
 libxslt-bin
+pkgconfig(libxcvt)
 pkgconfig(xfont2)
 pkgconfig(xkbcomp)
 pkgconfig(xkbfile)

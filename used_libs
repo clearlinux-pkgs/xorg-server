@@ -14,3 +14,4 @@ libpixman-1.so.0
 libsystemd.so.0
 libudev.so.1
 libunwind.so.8
+libxcvt.so.0
