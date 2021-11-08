@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xC6F7AE200374452D (tir5c3@yahoo.co.uk)
 #
 Name     : xorg-server
-Version  : 21.1.0
-Release  : 97
-URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.0.tar.gz
-Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.0.tar.gz
-Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.0.tar.gz.sig
+Version  : 21.1.1
+Release  : 98
+URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.1.tar.gz
+Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.1.tar.gz
+Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.1.tar.gz.sig
 Summary  : Modular X.Org X Server
 Group    : Development/Tools
 License  : MIT
@@ -89,12 +89,12 @@ Patch3: build.patch
 Patch4: 0001-add-default-keyboard-setup-for-xorg.patch
 
 %description
-This is a submodule to access linux framebuffer devices.
-It is supported to work as helper module (like vgahw)
-for the chipset drivers.  There are functions for
-saving/restoring/setting video modes, set palette entries,
-and a few more helper functions.  Some of them can be
-hooked directly into ScrnInfoRec.
+=============
+What Is It ?
+============
+Xephyr is a a kdrive server that outputs to a window on a pre-existing
+'host' X display. Think Xnest but with support for modern extensions
+like composite, damage and randr.
 
 %package bin
 Summary: bin components for the xorg-server package.
@@ -173,14 +173,14 @@ setuid components for the xorg-server package.
 
 
 %prep
-%setup -q -n xorg-server-21.1.0
-cd %{_builddir}/xorg-server-21.1.0
+%setup -q -n xorg-server-21.1.1
+cd %{_builddir}/xorg-server-21.1.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 pushd ..
-cp -a xorg-server-21.1.0 buildavx2
+cp -a xorg-server-21.1.1 buildavx2
 popd
 
 %build
@@ -188,7 +188,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635379219
+export SOURCE_DATE_EPOCH=1636388458
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
@@ -210,10 +210,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1635379219
+export SOURCE_DATE_EPOCH=1636388458
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
-cp %{_builddir}/xorg-server-21.1.0/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
+cp %{_builddir}/xorg-server-21.1.1/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
 pushd ../buildavx2/
 %make_install_v3
 popd
