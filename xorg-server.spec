@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xC6F7AE200374452D (tir5c3@yahoo.co.uk)
 #
 Name     : xorg-server
-Version  : 21.1.2
-Release  : 99
-URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.2.tar.gz
-Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.2.tar.gz
-Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.2.tar.gz.sig
+Version  : 21.1.3
+Release  : 100
+URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
+Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
+Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz.sig
 Summary  : Modular X.Org X Server
 Group    : Development/Tools
 License  : MIT
@@ -166,14 +166,14 @@ setuid components for the xorg-server package.
 
 
 %prep
-%setup -q -n xorg-server-21.1.2
-cd %{_builddir}/xorg-server-21.1.2
+%setup -q -n xorg-server-21.1.3
+cd %{_builddir}/xorg-server-21.1.3
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 pushd ..
-cp -a xorg-server-21.1.2 buildavx2
+cp -a xorg-server-21.1.3 buildavx2
 popd
 
 %build
@@ -181,7 +181,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639589761
+export SOURCE_DATE_EPOCH=1641324653
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
@@ -203,10 +203,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1639589761
+export SOURCE_DATE_EPOCH=1641324653
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
-cp %{_builddir}/xorg-server-21.1.2/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
+cp %{_builddir}/xorg-server-21.1.3/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
 pushd ../buildavx2/
 %make_install_v3
 popd
