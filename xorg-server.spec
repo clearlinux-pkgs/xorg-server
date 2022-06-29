@@ -6,7 +6,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.3
-Release  : 103
+Release  : 104
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz.sig
@@ -76,10 +76,9 @@ BuildRequires : xtrans-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: 0001-sdksyms.sh-Make-sdksyms.sh-work-with-gcc5.patch
-Patch2: mmap-offset.patch
-Patch3: build.patch
-Patch4: 0001-add-default-keyboard-setup-for-xorg.patch
+Patch1: 0001-add-default-keyboard-setup-for-xorg.patch
+Patch2: backport-present-Check-for-NULL-to-prevent-crash.patch
+Patch3: backport-render-Fix-build-with-gcc-12.patch
 
 %description
 This is a submodule to access linux framebuffer devices.
@@ -171,7 +170,6 @@ cd %{_builddir}/xorg-server-21.1.3
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 pushd ..
 cp -a xorg-server-21.1.3 buildavx2
 popd
@@ -181,15 +179,25 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642803978
+export SOURCE_DATE_EPOCH=1656538824
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
-export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-%reconfigure --disable-static --with-int10=x86emu --enable-config-udev --enable-config-udev-kms  --enable-dri2 --enable-dri --enable-dri3 --enable-dbe --enable-record --enable-systemd-logind --enable-glamor --disable-xwayland
+export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+%reconfigure --disable-static --with-int10=x86emu \
+--enable-config-udev \
+--enable-config-udev-kms \
+--enable-dri2 \
+--enable-dri \
+--enable-dri3 \
+--enable-dbe \
+--enable-record \
+--enable-systemd-logind \
+--enable-glamor \
+--disable-xwayland
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
 pushd ../buildavx2/
@@ -198,12 +206,22 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
-%reconfigure --disable-static --with-int10=x86emu --enable-config-udev --enable-config-udev-kms  --enable-dri2 --enable-dri --enable-dri3 --enable-dbe --enable-record --enable-systemd-logind --enable-glamor --disable-xwayland
+%reconfigure --disable-static --with-int10=x86emu \
+--enable-config-udev \
+--enable-config-udev-kms \
+--enable-dri2 \
+--enable-dri \
+--enable-dri3 \
+--enable-dbe \
+--enable-record \
+--enable-systemd-logind \
+--enable-glamor \
+--disable-xwayland
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1642803978
+export SOURCE_DATE_EPOCH=1656538824
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
 cp %{_builddir}/xorg-server-21.1.3/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
@@ -213,11 +231,11 @@ popd
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/bin/Xwayland
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/bin/Xorg
 ## install_append content
 mkdir -p %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/bin/Xorg
 
 %files
 %defattr(-,root,root,-)
@@ -416,7 +434,6 @@ cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 /usr/lib64/xorg/modules/libshadowfb.so
 /usr/lib64/xorg/modules/libvgahw.so
 /usr/lib64/xorg/modules/libwfb.so
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
