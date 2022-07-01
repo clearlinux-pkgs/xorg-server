@@ -6,7 +6,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.3
-Release  : 104
+Release  : 105
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.3.tar.gz.sig
@@ -179,7 +179,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656538824
+export SOURCE_DATE_EPOCH=1656698568
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
@@ -221,7 +221,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656538824
+export SOURCE_DATE_EPOCH=1656698568
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
 cp %{_builddir}/xorg-server-21.1.3/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475
@@ -434,6 +434,7 @@ cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 /usr/lib64/xorg/modules/libshadowfb.so
 /usr/lib64/xorg/modules/libvgahw.so
 /usr/lib64/xorg/modules/libwfb.so
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
