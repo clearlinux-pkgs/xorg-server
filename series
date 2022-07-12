@@ -1,5 +1,3 @@
 #mmap-offset.patch
 #build.patch
 0001-add-default-keyboard-setup-for-xorg.patch
-backport-present-Check-for-NULL-to-prevent-crash.patch
-backport-render-Fix-build-with-gcc-12.patch
