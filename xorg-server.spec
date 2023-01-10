@@ -6,7 +6,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.6
-Release  : 192
+Release  : 193
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.6.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.6.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.6.tar.gz.sig
@@ -15,7 +15,6 @@ Group    : Development/Tools
 License  : MIT
 Requires: xorg-server-bin = %{version}-%{release}
 Requires: xorg-server-data = %{version}-%{release}
-Requires: xorg-server-filemap = %{version}-%{release}
 Requires: xorg-server-lib = %{version}-%{release}
 Requires: xorg-server-license = %{version}-%{release}
 Requires: xorg-server-man = %{version}-%{release}
@@ -92,7 +91,6 @@ Group: Binaries
 Requires: xorg-server-data = %{version}-%{release}
 Requires: xorg-server-setuid = %{version}-%{release}
 Requires: xorg-server-license = %{version}-%{release}
-Requires: xorg-server-filemap = %{version}-%{release}
 
 %description bin
 bin components for the xorg-server package.
@@ -119,20 +117,11 @@ Requires: xorg-server = %{version}-%{release}
 dev components for the xorg-server package.
 
 
-%package filemap
-Summary: filemap components for the xorg-server package.
-Group: Default
-
-%description filemap
-filemap components for the xorg-server package.
-
-
 %package lib
 Summary: lib components for the xorg-server package.
 Group: Libraries
 Requires: xorg-server-data = %{version}-%{release}
 Requires: xorg-server-license = %{version}-%{release}
-Requires: xorg-server-filemap = %{version}-%{release}
 
 %description lib
 lib components for the xorg-server package.
@@ -166,23 +155,21 @@ setuid components for the xorg-server package.
 %setup -q -n xorg-server-21.1.6
 cd %{_builddir}/xorg-server-21.1.6
 %patch1 -p1
-pushd ..
-cp -a xorg-server-21.1.6 buildavx2
-popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1673365567
+export SOURCE_DATE_EPOCH=1673366067
+unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
-export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %reconfigure --disable-static --with-int10=x86emu \
 --enable-config-udev \
 --enable-config-udev-kms \
@@ -195,35 +182,12 @@ export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fdebug-types-section -fe
 --enable-glamor \
 --disable-xwayland
 make  %{?_smp_mflags}
-unset PKG_CONFIG_PATH
-pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
-%reconfigure --disable-static --with-int10=x86emu \
---enable-config-udev \
---enable-config-udev-kms \
---enable-dri2 \
---enable-dri \
---enable-dri3 \
---enable-dbe \
---enable-record \
---enable-systemd-logind \
---enable-glamor \
---disable-xwayland
-make  %{?_smp_mflags}
-popd
 
 %install
-export SOURCE_DATE_EPOCH=1673365567
+export SOURCE_DATE_EPOCH=1673366067
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xorg-server
 cp %{_builddir}/xorg-server-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xorg-server/11d1ae389a1a78f7832586e4c2a0c3c7263b7475 || :
-pushd ../buildavx2/
-%make_install_v3
-popd
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}*/usr/bin/Xwayland
@@ -231,7 +195,6 @@ rm -f %{buildroot}*/usr/bin/Xwayland
 mkdir -p %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/bin/Xorg
 
 %files
 %defattr(-,root,root,-)
@@ -243,7 +206,6 @@ cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 /usr/bin/Xnest
 /usr/bin/Xvfb
 /usr/bin/gtf
-/usr/share/clear/optimized-elf/bin*
 
 %files data
 %defattr(-,root,root,-)
@@ -413,10 +375,6 @@ cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 /usr/lib64/pkgconfig/xorg-server.pc
 /usr/share/aclocal/*.m4
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-xorg-server
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/xorg/modules/drivers/modesetting_drv.so
@@ -430,7 +388,6 @@ cp 00-keyboard.conf %{buildroot}/usr/share/defaults/etc/X11/xorg.conf.d/
 /usr/lib64/xorg/modules/libshadowfb.so
 /usr/lib64/xorg/modules/libvgahw.so
 /usr/lib64/xorg/modules/libwfb.so
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
