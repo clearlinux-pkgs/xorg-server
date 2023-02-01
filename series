@@ -1,3 +1,4 @@
 #mmap-offset.patch
 #build.patch
 0001-add-default-keyboard-setup-for-xorg.patch
+xorg-git-update.patch
