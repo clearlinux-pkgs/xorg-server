@@ -1,13 +1,14 @@
-21.1.7
+21.1.8
 libxslt-bin
 pkgconfig(audit)
+pkgconfig(dri)
+pkgconfig(gbm)
 pkgconfig(libbsd)
-pkgconfig(libselinux)
+pkgconfig(libdrm)
 pkgconfig(libtirpc)
 pkgconfig(libxcvt)
 pkgconfig(xfont2)
 pkgconfig(xkbcomp)
 pkgconfig(xkbfile)
-pkgconfig(xorg-sgml-doctools)
 xkbcomp-bin
 xmlto
