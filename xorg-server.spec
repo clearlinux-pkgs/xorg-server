@@ -7,7 +7,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.8
-Release  : 357
+Release  : 358
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.8.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.8.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.8.tar.gz.sig
