@@ -9,7 +9,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.12
-Release  : 484
+Release  : 485
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.12.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.12.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.12.tar.gz.sig
