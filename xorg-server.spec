@@ -9,7 +9,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.13
-Release  : 574
+Release  : 575
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz.sig
