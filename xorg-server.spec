@@ -5,15 +5,15 @@
 # autospec version: v20
 # autospec commit: f35655a
 #
-# Source0 file verified with key 0xB6B1CEAE5103DB07 (mattst88@gmail.com)
+# Source0 file verified with key 0x14706DBE1E4B4540 (fourdan@xfce.org)
 #
 Name     : xorg-server
-Version  : 21.1.13
-Release  : 587
-URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz
-Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz
-Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.13.tar.gz.sig
-Source2  : B6B1CEAE5103DB07.pkey
+Version  : 21.1.14
+Release  : 588
+URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.14.tar.gz
+Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.14.tar.gz
+Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.14.tar.gz.sig
+Source2  : 14706DBE1E4B4540.pkey
 Summary  : Modular X.Org X Server
 Group    : Development/Tools
 License  : MIT
@@ -77,12 +77,12 @@ BuildRequires : xtrans-dev
 Patch1: 0001-add-default-keyboard-setup-for-xorg.patch
 
 %description
-This is a submodule to access linux framebuffer devices.
-It is supported to work as helper module (like vgahw)
-for the chipset drivers.  There are functions for
-saving/restoring/setting video modes, set palette entries,
-and a few more helper functions.  Some of them can be
-hooked directly into ScrnInfoRec.
+=============
+What Is It ?
+============
+Xephyr is a a kdrive server that outputs to a window on a pre-existing
+'host' X display. Think Xnest but with support for modern extensions
+like composite, damage and randr.
 
 %package bin
 Summary: bin components for the xorg-server package.
@@ -155,12 +155,12 @@ mkdir .gnupg
 chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE2}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE1} %{SOURCE0} > gpg.status
-grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) B6B1CEAE5103DB07' gpg.status
-%setup -q -n xorg-server-21.1.13
-cd %{_builddir}/xorg-server-21.1.13
+grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) 14706DBE1E4B4540' gpg.status
+%setup -q -n xorg-server-21.1.14
+cd %{_builddir}/xorg-server-21.1.14
 %patch -P 1 -p1
 pushd ..
-cp -a xorg-server-21.1.13 buildavx2
+cp -a xorg-server-21.1.14 buildavx2
 popd
 
 %build
@@ -168,7 +168,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1729607229
+export SOURCE_DATE_EPOCH=1730294330
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="-O3 -g -fopt-info-vec "
