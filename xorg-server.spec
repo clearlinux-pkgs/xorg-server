@@ -9,7 +9,7 @@
 #
 Name     : xorg-server
 Version  : 21.1.15
-Release  : 637
+Release  : 638
 URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.15.tar.gz
 Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.15.tar.gz
 Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.15.tar.gz.sig
