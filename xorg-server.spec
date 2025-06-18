@@ -8,11 +8,11 @@
 # Source0 file verified with key 0x14706DBE1E4B4540 (fourdan@xfce.org)
 #
 Name     : xorg-server
-Version  : 21.1.17
-Release  : 666
-URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.17.tar.gz
-Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.17.tar.gz
-Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.17.tar.gz.sig
+Version  : 21.1.18
+Release  : 667
+URL      : https://www.x.org/releases/individual/xserver/xorg-server-21.1.18.tar.gz
+Source0  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.18.tar.gz
+Source1  : https://www.x.org/releases/individual/xserver/xorg-server-21.1.18.tar.gz.sig
 Source2  : 14706DBE1E4B4540.pkey
 Summary  : Modular X.Org X Server
 Group    : Development/Tools
@@ -156,11 +156,11 @@ chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE2}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE1} %{SOURCE0} > gpg.status
 grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) 14706DBE1E4B4540' gpg.status
-%setup -q -n xorg-server-21.1.17
-cd %{_builddir}/xorg-server-21.1.17
+%setup -q -n xorg-server-21.1.18
+cd %{_builddir}/xorg-server-21.1.18
 %patch -P 1 -p1
 pushd ..
-cp -a xorg-server-21.1.17 buildavx2
+cp -a xorg-server-21.1.18 buildavx2
 popd
 
 %build
@@ -168,7 +168,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1750184079
+export SOURCE_DATE_EPOCH=1750267720
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="-O3 -g -fopt-info-vec "
